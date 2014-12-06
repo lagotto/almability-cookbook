@@ -15,3 +15,10 @@ passenger_nginx ENV['APPLICATION'] do
   group           ENV['DEPLOY_GROUP']
   action          :config
 end
+
+# create required files and folders, and deploy application
+capistrano ENV['APPLICATION'] do
+  user            ENV['DEPLOY_USER']
+  group           ENV['DEPLOY_GROUP']
+  action          [:config, :bundle_install, :restart]
+end
